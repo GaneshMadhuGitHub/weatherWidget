@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="weatherShowcaseApp">
+<head>
+    <meta charset="utf-8"/>
+    <title>Weather Widget</title>
+    <link rel="stylesheet" href="css/weatherWidgetStyles.css" />
+<body >
+<div class="weatherWrapper" ng-controller="weatherWidgetController">
+    <div class="weather_container weather-widget">
+        <div class="location">
+            
+            <span class="city">{{searchedCity}},{{searchedState}} </span>
+            <div class="temperature">
+                <span class="number">{{temperatureInDegree}}</span>
+                <span class="marks"> <span class="degrees">{{degreeSymbol}}</span>
+                </span>
+            </div>
+        </div>
+        <div class="condition">
+            <!--dynamic position of the image-->
+            <span class="weatherIcon" ng-style="{'background-position':position1}"></span>
+            <div class="weatherInfo">
+                <span>{{temparaturecondition}}</span>
+            </div>
+        </div>
+        <div class="dailyWeather">
+            <!--repeat will show only the first 5 days out of all results from the service , we can vary this-->
+            <div class="whichDay" data-ng-repeat="weatherReport in dailyWeatherReportList.slice(0,minimaldaysToShowInWidget)">
+                <div class="tooltip" ng-class="{'borderSeparation':!$last}" >
+                    <!--dynamic dotted border , it should not show for the last day-->
+                    <label>{{weatherReport.day}}</label>
+                    <span class="weatherInfo">{{weatherReport.high}}°/{{weatherReport.low}}°</span>
+                    <!--extra feature to display the dates and weather conditions, use ful to view the future dates-->
+                    <span class="tooltiptext">{{weatherReport.date}}  {{weatherReport.text}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <script src="js/angular.min.js"></script>
+		<script src="js/weatherWidget.js"></script>
+</body>
+</html>
+
+
+
